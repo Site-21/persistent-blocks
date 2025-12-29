@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "package": "com.site21.persistentblocks.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AttachedStemBlockMixin",
+    "BambooSaplingBlockMixin",
+    "BambooStalkBlockMixin",
+    "BaseCoralPlantTypeBlockMixin",
+    "BigDripleafBlockMixin",
+    "BlockBehaviourMixin",
+    "BlockMixin",
+    "BushBlockMixin",
+    "CactusBlockMixin",
+    "ChorusPlantBlockMixin",
+    "CocoaBlockMixin",
+    "CoralBlockMixin",
+    "CropBlockMixin",
+    "FarmBlockMixin",
+    "GlowLichenBlockMixin",
+    "GrowingPlantBlockMixin",
+    "GrowingPlantBodyBlockMixin",
+    "GrowingPlantHeadBlockMixin",
+    "HangingRootsBlockMixin",
+    "MangrovePropaguleBlockMixin",
+    "MultifaceBlockMixin",
+    "MushroomBlockMixin",
+    "SmallDripleafBlockMixin",
+    "SugarCaneBlockMixin",
+    "SweetBerryBushBlockMixin",
+    "TurtleEggBlockMixin",
+    "VineBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
