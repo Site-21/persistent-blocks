@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,6 +23,8 @@ import static com.site21.persistentblocks.PersistentBlocks.persistentBlocks;
 
 @Mixin(Block.class)
 public class BlockMixin {
+    @Shadow private BlockState defaultBlockState;
+
     @Unique
     public Block persistentblocks$getThis() {
         return (Block)(Object) this;
@@ -69,5 +72,11 @@ public class BlockMixin {
         }
     }
 
+    @Inject(at = @At("RETURN"), method = "registerDefaultState")
+    private void persistentblocks$registerDefaultState(@NotNull BlockState state, CallbackInfo ci) {
+        if (state.hasProperty(BlockStateProperties.PERSISTENT)) {
+            defaultBlockState = defaultBlockState.setValue(BlockStateProperties.PERSISTENT, false);
+        }
+    }
 }
 

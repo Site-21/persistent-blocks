@@ -14,7 +14,7 @@ public class BlockBehaviourMixin {
     @Inject(at = @At("RETURN"), method = "isRandomlyTicking", cancellable = true)
     protected void persistentblocks$isRandomlyTicking(@NotNull BlockState state, @NotNull CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValue() && state.hasProperty(BlockStateProperties.PERSISTENT)) {
-            cir.setReturnValue(false);
+            cir.setReturnValue(!state.getValue(BlockStateProperties.PERSISTENT));
         }
     }
 }

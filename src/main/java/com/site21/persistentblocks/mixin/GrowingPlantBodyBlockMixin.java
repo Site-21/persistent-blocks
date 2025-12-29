@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class GrowingPlantBodyBlockMixin {
     @Inject(at = @At("HEAD"), method = "updateShape", cancellable = true)
     protected void updateShape(@NotNull BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos, CallbackInfoReturnable<BlockState> cir) {
+
         if (state.getValue(BlockStateProperties.PERSISTENT)) {
             cir.setReturnValue(state);
-        }
-    }
+        }    }
 }

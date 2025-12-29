@@ -1,5 +1,6 @@
 package com.site21.persistentblocks.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -23,9 +24,9 @@ public class CocoaBlockMixin {
         builder.add(BlockStateProperties.PERSISTENT);
     }
 
-    @Inject(at = @At("RETURN"), method = "isRandomlyTicking", cancellable = true)
-    protected void persistentblocks$isRandomlyTicking(@NotNull BlockState state, @NotNull CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!state.getValue(BlockStateProperties.PERSISTENT) && cir.getReturnValue());
+    @ModifyReturnValue(method = "isRandomlyTicking", at = @At("RETURN"))
+    private boolean modifyIsRandomlyTickingReturnValue(boolean original, @NotNull BlockState state) {
+        return !state.getValue(BlockStateProperties.PERSISTENT) && original;
     }
 
     @Inject(at = @At("HEAD"), method = "canSurvive", cancellable = true)

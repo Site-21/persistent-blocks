@@ -1,5 +1,6 @@
 package com.site21.persistentblocks.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -11,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SweetBerryBushBlock.class)
 public class SweetBerryBushBlockMixin {
-    @Inject(at = @At("RETURN"), method = "isRandomlyTicking", cancellable = true)
-    protected void persistentblocks$isRandomlyTicking(@NotNull BlockState state, @NotNull CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!state.getValue(BlockStateProperties.PERSISTENT) && cir.getReturnValue());
+    @ModifyReturnValue(method = "isRandomlyTicking", at = @At("RETURN"))
+    private boolean modifyIsRandomlyTickingReturnValue(boolean original, @NotNull BlockState state) {
+        return !state.getValue(BlockStateProperties.PERSISTENT) && original;
     }
 }
